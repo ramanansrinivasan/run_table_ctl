@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.34601.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{C9674DCB-5085-4A16-B785-4C70DD1589BD}") = "run_table_ctl", "run_table_ctl.dtproj", "{4C0A4A1A-CF16-4B82-8806-D1DDCEC2356E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Azure|Default = Azure|Default
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4C0A4A1A-CF16-4B82-8806-D1DDCEC2356E}.Azure|Default.ActiveCfg = Azure
+		{4C0A4A1A-CF16-4B82-8806-D1DDCEC2356E}.Azure|Default.Build.0 = Azure
+		{4C0A4A1A-CF16-4B82-8806-D1DDCEC2356E}.Development|Default.ActiveCfg = Development
+		{4C0A4A1A-CF16-4B82-8806-D1DDCEC2356E}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B95A1DA8-29D4-4EC9-8270-FA5E4A63DA8D}
+	EndGlobalSection
+EndGlobal
