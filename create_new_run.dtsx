@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="70"
-  DTS:VersionGUID="{0E335B24-4050-45C4-8387-F7DA73ACE3CC}">
+  DTS:VersionBuild="71"
+  DTS:VersionGUID="{6BE1CB0F-896D-41E1-A7EC-5C544DBEBF10}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:PackageParameters>
@@ -24,7 +24,7 @@
       DTS:Required="True">
       <DTS:Property
         DTS:DataType="8"
-        DTS:Name="ParameterValue">inventory</DTS:Property>
+        DTS:Name="ParameterValue">titles</DTS:Property>
     </DTS:PackageParameter>
   </DTS:PackageParameters>
   <DTS:Variables />
