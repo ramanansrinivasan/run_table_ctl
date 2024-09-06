@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="71"
-  DTS:VersionGUID="{6BE1CB0F-896D-41E1-A7EC-5C544DBEBF10}">
+  DTS:VersionBuild="72"
+  DTS:VersionGUID="{C5E317F9-1B6F-47F5-B754-B6444B252311}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:PackageParameters>
@@ -24,7 +24,7 @@
       DTS:Required="True">
       <DTS:Property
         DTS:DataType="8"
-        DTS:Name="ParameterValue">titles</DTS:Property>
+        DTS:Name="ParameterValue">vendors</DTS:Property>
     </DTS:PackageParameter>
   </DTS:PackageParameters>
   <DTS:Variables />
@@ -78,14 +78,14 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="142.666666666667,42.6666666666667"
+          Size="143,43"
           Id="Package\Create run record\create record"
           TopLeft="23.4583317221453,20.6666705817508" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="205.333333333334,126.666666666667"
-          Size="205.333333333334,170"
+          PanelSize="205,127"
+          Size="205,170"
           Id="Package\Create run record"
           TopLeft="84.9999987334013,144.368423770009" />
       </GraphLayout>
