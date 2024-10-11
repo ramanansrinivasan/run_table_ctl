@@ -11,10 +11,24 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="7"
-  DTS:VersionGUID="{A3ADEA19-6B4A-4F71-BCF0-E388C2CBBFF4}">
+  DTS:VersionBuild="17"
+  DTS:VersionGUID="{49309E98-60CE-48A0-A6E6-F8DD81E1E1C5}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DM_Working_DB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{3EFD2F24-22FE-4EFC-B948-52505D7EA4E0}"
+      DTS:ObjectName="DM_Working_DB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=UKWWHDSQLWI099;Initial Catalog=DM_DryRun3_NP3;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{3EFD2F24-22FE-4EFC-B948-52505D7EA4E0}UKWWHDSQLWI099.DM_DryRun3_NP3;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
@@ -40,7 +54,7 @@
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{335E0AE0-9B14-4738-9B50-232695B521E4}"
-              SQLTask:SqlStatementSource="&#xA;-- [dbo].[location_maxweights]&#xA;-- [dbo].[StorageLocExtract_NP1]&#xA;&#xA;Truncate table [config].[wms_dm_run_ctl];&#xA;-- Truncate table [config].[data_element_payload_fillers];&#xA;&#xA;&#xA;Truncate table [source].[Awsbndord];&#xA;&#xA;Truncate table [source].[Awslochdr];&#xA;Truncate table [source].[Awslocdet];&#xA;Truncate table [source].[Awstitloc];&#xA;&#xA;Truncate table [source].[sap_titles];&#xA;Truncate table [source].[sap_title_data];&#xA;Truncate table [source].[sap_titles_not_meeting_requirements];&#xA;&#xA;Truncate table [source].[countrycode_map];&#xA;&#xA;Truncate table [source].[sap_customers];&#xA;Truncate table [source].[sap_vendor_data];&#xA;&#xA;Truncate table [source].[vista_titles];&#xA;Truncate table [source].[vista_vendors];&#xA;Truncate table [source].[vista_inventory];&#xA;&#xA;&#xA;Truncate table [source].[sap_ibd_title_data];&#xA;Truncate table [source].[sap_ibd_vendor_data];&#xA;Truncate table [source].[sap_inbound_deliveries];&#xA;Truncate table [source].[sap_inbound_titles];&#xA;Truncate table [source].[sap_inbound_titles_not_meeting_requirements];&#xA;&#xA;Truncate table [transform].[vendors_staging];&#xA;Truncate table [transform].[titles_staging];&#xA;Truncate table [transform].[title_locations_staging];&#xA;&#xA;Truncate table [transform].[title_load_results];&#xA;Truncate table [transform].[vendor_load_results];&#xA;Truncate table [transform].[inventory_load_results];&#xA;&#xA;&#xA;Truncate table [transform].[titles_transform_errors];&#xA;Truncate table [transform].[vendors_transform_errors];&#xA;Truncate table [transform].[inventories_transform_errors];&#xA;Truncate table [transform].[vista_inventory]&#xA;&#xA;Truncate table [final].[titles];&#xA;Truncate table [final].[vendors];&#xA;Truncate table [final].[inventories];&#xA;&#xA;Truncate table [final].[reprocess_title_errors];&#xA;Truncate table [final].[reprocess_vendor_errors];&#xA;Truncate table [final].[reprocess_inventory_errors];&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              SQLTask:SqlStatementSource="&#xA;-- [dbo].[location_maxweights]&#xA;-- [dbo].[StorageLocExtract_NP1]&#xA;&#xA;Truncate table [config].[wms_dm_run_ctl];&#xA;--ALTER SEQUENCE [config].[dm_run_id_seq] RESTART WITH 1;&#xA;-- Truncate table [config].[data_element_payload_fillers];&#xA;&#xA;Truncate table [source].[countrycode_map];&#xA;Truncate table [source].[reference_locations];&#xA;&#xA;Truncate table [source].[Awsbndord];&#xA;&#xA;Truncate table [source].[Awslochdr];&#xA;Truncate table [source].[Awslocdet];&#xA;Truncate table [source].[Awstitloc];&#xA;&#xA;Truncate table [source].[sap_titles];&#xA;Truncate table [source].[sap_title_data];&#xA;Truncate table [source].[sap_titles_not_meeting_requirements];&#xA;&#xA;&#xA;&#xA;Truncate table [source].[sap_customers];&#xA;Truncate table [source].[sap_vendor_data];&#xA;&#xA;Truncate table [source].[vista_titles];&#xA;Truncate table [source].[vista_vendors];&#xA;Truncate table [source].[vista_inventory];&#xA;&#xA;Truncate table [source].[sap_inbound_deliveries];&#xA;Truncate table [source].[sap_inbound_deliveries_fullload];&#xA;Truncate table [source].[sap_inbound_title_data];&#xA;Truncate table [source].[sap_inbound_missing_titles];&#xA;Truncate table [source].[sap_inbound_vendor_data];&#xA;Truncate table [source].[sap_inbound_missing_vendors];&#xA;Truncate table [source].[sap_inbound_titles];&#xA;Truncate table [source].[sap_inbound_titles_not_meeting_requirements];&#xA;&#xA;Truncate table [transform].[vendors_staging];&#xA;Truncate table [transform].[titles_staging];&#xA;Truncate table [transform].[title_locations_staging];&#xA;&#xA;Truncate table [transform].[title_load_results];&#xA;Truncate table [transform].[vendor_load_results];&#xA;Truncate table [transform].[inventory_load_results];&#xA;&#xA;&#xA;Truncate table [transform].[titles_transform_errors];&#xA;Truncate table [transform].[vendors_transform_errors];&#xA;Truncate table [transform].[inventories_transform_errors];&#xA;Truncate table [transform].[vista_inventory]&#xA;&#xA;Truncate table [final].[titles];&#xA;Truncate table [final].[vendors];&#xA;Truncate table [final].[inventories];&#xA;&#xA;Truncate table [final].[reprocess_title_errors];&#xA;Truncate table [final].[reprocess_vendor_errors];&#xA;Truncate table [final].[reprocess_inventory_errors];&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
       </DTS:Executables>
@@ -59,14 +73,14 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="174,42"
+          Size="172,42.6666666666667"
           Id="Package\preTask_ClearAllTables\ClearAll_DMTables"
           TopLeft="43,47" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="230.666666666667,158.666666666667"
-          Size="230.666666666667,202"
+          PanelSize="230.666666666667,160"
+          Size="230.666666666667,202.666666666667"
           Id="Package\preTask_ClearAllTables"
           TopLeft="146,215" />
       </GraphLayout>

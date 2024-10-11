@@ -11,10 +11,24 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="2-cutover_create_new_run"
   DTS:PackageType="5"
-  DTS:VersionBuild="94"
-  DTS:VersionGUID="{E43354D3-4B67-4A6D-B4B1-9398BBE42F6B}">
+  DTS:VersionBuild="95"
+  DTS:VersionGUID="{CF54392C-08DA-440A-8DB5-5BD27DAC26BB}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DM_Working_DB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{495026EE-0DC0-44AF-BB15-696A63B8223E}"
+      DTS:ObjectName="DM_Working_DB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=UKWWHDSQLWI099;Initial Catalog=DM_DryRun3_NP3;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-2-cutover_create_new_run-{495026EE-0DC0-44AF-BB15-696A63B8223E}UKWWHDSQLWI099.DM_DryRun3_NP3;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
@@ -39,7 +53,7 @@
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{335E0AE0-9B14-4738-9B50-232695B521E4}"
+              SQLTask:Connection="{495026EE-0DC0-44AF-BB15-696A63B8223E}"
               SQLTask:SqlStatementSource="INSERT INTO [config].[wms_dm_run_ctl] (&#xA;  [package_name],[run_finish_time],[run_comments]&#xA;) VALUES ('inbound',NULL,NULL)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
@@ -55,7 +69,7 @@
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{335E0AE0-9B14-4738-9B50-232695B521E4}"
+              SQLTask:Connection="{495026EE-0DC0-44AF-BB15-696A63B8223E}"
               SQLTask:SqlStatementSource="INSERT INTO [config].[wms_dm_run_ctl] (&#xA;  [package_name],[run_finish_time],[run_comments]&#xA;) VALUES ('inventory',NULL,NULL)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
@@ -71,7 +85,7 @@
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{335E0AE0-9B14-4738-9B50-232695B521E4}"
+              SQLTask:Connection="{495026EE-0DC0-44AF-BB15-696A63B8223E}"
               SQLTask:SqlStatementSource="INSERT INTO [config].[wms_dm_run_ctl] (&#xA;  [package_name],[run_finish_time],[run_comments]&#xA;) VALUES ('titles',NULL,NULL)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
@@ -87,7 +101,7 @@
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{335E0AE0-9B14-4738-9B50-232695B521E4}"
+              SQLTask:Connection="{495026EE-0DC0-44AF-BB15-696A63B8223E}"
               SQLTask:SqlStatementSource="INSERT INTO [config].[wms_dm_run_ctl] (&#xA;  [package_name],[run_finish_time],[run_comments]&#xA;) VALUES ('vendors',NULL,NULL)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
@@ -133,6 +147,14 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="198.666666666667,42.6666666666667"
+          Id="Package\Create run record\Create Inbound Run Entry"
+          TopLeft="88.45833075357,257.842105147251" />
+        <NodeLayout
+          Size="198.666666666667,42.6666666666667"
+          Id="Package\Create run record\Create Inventory Run Entry"
+          TopLeft="90.3333307256303,176.999999755307" />
+        <NodeLayout
           Size="191.333333333334,42.6666666666667"
           Id="Package\Create run record\Create Title Run Entry"
           TopLeft="89.7083307349434,22.7193021993339" />
@@ -162,10 +184,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="198.666666666667,42.6666666666667"
-          Id="Package\Create run record\Create Inventory Run Entry"
-          TopLeft="90.3333307256303,176.999999755307" />
         <EdgeLayout
           Id="Package\Create run record.PrecedenceConstraints[Constraint 1]"
           TopLeft="188.729164072933,140.894736030756">
@@ -188,10 +206,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="198.666666666667,42.6666666666667"
-          Id="Package\Create run record\Create Inbound Run Entry"
-          TopLeft="88.45833075357,257.842105147251" />
         <EdgeLayout
           Id="Package\Create run record.PrecedenceConstraints[Constraint 2]"
           TopLeft="188.729164072933,219.666666421974">
@@ -217,7 +231,7 @@
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="465.333333333334,360"
+          PanelSize="465.333333333334,360.666666666667"
           Size="465.333333333334,403.333333333334"
           Id="Package\Create run record"
           TopLeft="84.9999987334014,144.368423770009" />

@@ -11,10 +11,24 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="91"
-  DTS:VersionGUID="{863E75F0-01A1-480A-8A1F-C369300B997E}">
+  DTS:VersionBuild="104"
+  DTS:VersionGUID="{9F169E8F-977C-4022-B1B7-A47A9351CFEE}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DM_Working_DB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{3B89E0CE-36BC-4725-A539-395820C48942}"
+      DTS:ObjectName="DM_Working_DB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=UKWWHDSQLWI099;Initial Catalog=DM_DryRun3_NP3;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package-{3B89E0CE-36BC-4725-A539-395820C48942}UKWWHDSQLWI099.DM_DryRun3_NP3;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
@@ -28,34 +42,82 @@
       <DTS:Variables />
       <DTS:Executables>
         <DTS:Executable
-          DTS:refId="Package\Create run record\Create Title Run Entry"
+          DTS:refId="Package\Create run record\ClearAll_DMTables"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
-          DTS:DTSID="{AC1D1C33-170B-4C77-8A88-C8F9FB421ECD}"
+          DTS:DTSID="{1a920db5-1331-4860-8e97-ff5725ef2bb6}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
-          DTS:ObjectName="Create Title Run Entry"
+          DTS:ObjectName="ClearAll_DMTables"
           DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{335E0AE0-9B14-4738-9B50-232695B521E4}"
+              SQLTask:Connection="{3B89E0CE-36BC-4725-A539-395820C48942}"
+              SQLTask:SqlStatementSource="&#xA;-- [dbo].[location_maxweights]&#xA;-- [dbo].[StorageLocExtract_NP1]&#xA;&#xA;Truncate table [config].[wms_dm_run_ctl];&#xA;--ALTER SEQUENCE [config].[dm_run_id_seq] RESTART WITH 1;&#xA;-- Truncate table [config].[data_element_payload_fillers];&#xA;&#xA;Truncate table [source].[countrycode_map];&#xA;Truncate table [source].[reference_locations];&#xA;&#xA;Truncate table [source].[Awsbndord];&#xA;&#xA;Truncate table [source].[Awslochdr];&#xA;Truncate table [source].[Awslocdet];&#xA;Truncate table [source].[Awstitloc];&#xA;&#xA;Truncate table [source].[sap_titles];&#xA;Truncate table [source].[sap_title_data];&#xA;Truncate table [source].[sap_titles_not_meeting_requirements];&#xA;&#xA;&#xA;&#xA;Truncate table [source].[sap_customers];&#xA;Truncate table [source].[sap_vendor_data];&#xA;&#xA;Truncate table [source].[vista_titles];&#xA;Truncate table [source].[vista_vendors];&#xA;Truncate table [source].[vista_inventory];&#xA;&#xA;Truncate table [source].[sap_inbound_deliveries];&#xA;Truncate table [source].[sap_inbound_deliveries_fullload];&#xA;Truncate table [source].[sap_inbound_title_data];&#xA;Truncate table [source].[sap_inbound_missing_titles];&#xA;Truncate table [source].[sap_inbound_vendor_data];&#xA;Truncate table [source].[sap_inbound_missing_vendors];&#xA;Truncate table [source].[sap_inbound_titles];&#xA;Truncate table [source].[sap_inbound_titles_not_meeting_requirements];&#xA;&#xA;Truncate table [transform].[vendors_staging];&#xA;Truncate table [transform].[titles_staging];&#xA;Truncate table [transform].[title_locations_staging];&#xA;&#xA;Truncate table [transform].[title_load_results];&#xA;Truncate table [transform].[vendor_load_results];&#xA;Truncate table [transform].[inventory_load_results];&#xA;&#xA;&#xA;Truncate table [transform].[titles_transform_errors];&#xA;Truncate table [transform].[vendors_transform_errors];&#xA;Truncate table [transform].[inventories_transform_errors];&#xA;Truncate table [transform].[vista_inventory]&#xA;&#xA;Truncate table [final].[titles];&#xA;Truncate table [final].[vendors];&#xA;Truncate table [final].[inventories];&#xA;&#xA;Truncate table [final].[reprocess_title_errors];&#xA;Truncate table [final].[reprocess_vendor_errors];&#xA;Truncate table [final].[reprocess_inventory_errors];&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Create run record\Create inbound record"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Create inbound record"
+          DTS:DTSID="{86743467-0BDC-4006-922E-BFEE42A06D69}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Create inbound record"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{3B89E0CE-36BC-4725-A539-395820C48942}"
+              SQLTask:SqlStatementSource="INSERT INTO [config].[wms_dm_run_ctl] (&#xA;  [package_name],[run_finish_time],[run_comments]&#xA;) VALUES ('inbound',NULL,NULL)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Create run record\Create inventory record"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Create inventory record"
+          DTS:DTSID="{55F0E18D-BC9C-46BF-ADF6-D612CBFE4D1D}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Create inventory record"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{3B89E0CE-36BC-4725-A539-395820C48942}"
+              SQLTask:SqlStatementSource="INSERT INTO [config].[wms_dm_run_ctl] (&#xA;  [package_name],[run_finish_time],[run_comments]&#xA;) VALUES ('inventory',NULL,NULL)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Create run record\Create title record"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Create title record"
+          DTS:DTSID="{260EA5F6-A773-4450-B46D-CAD9DA356C8C}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Create title record"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{3B89E0CE-36BC-4725-A539-395820C48942}"
               SQLTask:SqlStatementSource="INSERT INTO [config].[wms_dm_run_ctl] (&#xA;  [package_name],[run_finish_time],[run_comments]&#xA;) VALUES ('titles',NULL,NULL)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
-          DTS:refId="Package\Create run record\Create Vendor Run Entry"
+          DTS:refId="Package\Create run record\Create vendor record"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
-          DTS:Description="Execute SQL Task"
-          DTS:DTSID="{92d4aa10-d5bf-4e70-affa-723d91ae0039}"
+          DTS:Description="Create vendor record"
+          DTS:DTSID="{7ED371F2-9F7B-4D4C-AE0C-6BA407C3DE98}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
-          DTS:ObjectName="Create Vendor Run Entry"
+          DTS:ObjectName="Create vendor record"
           DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{335E0AE0-9B14-4738-9B50-232695B521E4}"
+              SQLTask:Connection="{3B89E0CE-36BC-4725-A539-395820C48942}"
               SQLTask:SqlStatementSource="INSERT INTO [config].[wms_dm_run_ctl] (&#xA;  [package_name],[run_finish_time],[run_comments]&#xA;) VALUES ('vendors',NULL,NULL)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
@@ -64,11 +126,35 @@
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Create run record.PrecedenceConstraints[Constraint]"
           DTS:CreationName=""
-          DTS:DTSID="{0BC937AB-101B-4ECC-AC29-BC3381C5C0D4}"
-          DTS:From="Package\Create run record\Create Title Run Entry"
+          DTS:DTSID="{0D08E4F5-444E-4457-85C4-E1364832915D}"
+          DTS:From="Package\Create run record\ClearAll_DMTables"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint"
-          DTS:To="Package\Create run record\Create Vendor Run Entry" />
+          DTS:To="Package\Create run record\Create title record" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Create run record.PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{8D61B845-9AA6-411F-85B3-28E15D0563F0}"
+          DTS:From="Package\Create run record\Create title record"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\Create run record\Create vendor record" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Create run record.PrecedenceConstraints[Constraint 5]"
+          DTS:CreationName=""
+          DTS:DTSID="{EE66055D-8151-4310-B821-FFEDA40F0CBE}"
+          DTS:From="Package\Create run record\Create vendor record"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 5"
+          DTS:To="Package\Create run record\Create inventory record" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Create run record.PrecedenceConstraints[Constraint 6]"
+          DTS:CreationName=""
+          DTS:DTSID="{D4AE52A5-6345-42AE-BB6D-46A257B6F445}"
+          DTS:From="Package\Create run record\Create inventory record"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 6"
+          DTS:To="Package\Create run record\Create inbound record" />
       </DTS:PrecedenceConstraints>
     </DTS:Executable>
   </DTS:Executables>
@@ -83,29 +169,107 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="191.333333333334,42.6666666666667"
-          Id="Package\Create run record\Create Title Run Entry"
-          TopLeft="89.7083307349434,22.7193021993339" />
+          Size="185.333333333334,42.6666666666667"
+          Id="Package\Create run record\Create title record"
+          TopLeft="370.958326543992,151.938599627159" />
         <NodeLayout
-          Size="198.666666666667,42.6666666666667"
-          Id="Package\Create run record\Create Vendor Run Entry"
-          TopLeft="88.4583307535698,98.2280693640889" />
+          Size="185.333333333334,42.6666666666667"
+          Id="Package\Create run record\Create vendor record"
+          TopLeft="370.958326543992,267.912286020602" />
         <EdgeLayout
-          Id="Package\Create run record.PrecedenceConstraints[Constraint]"
-          TopLeft="186.583330744257,65.3859688660006">
+          Id="Package\Create run record.PrecedenceConstraints[Constraint 4]"
+          TopLeft="463.624993210659,194.605266293826">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,32.8421004980883"
+              EndConnector="0,73.3070197267766"
               Start="0,0"
-              End="0,25.3421004980883">
+              End="0,65.8070197267766">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,25.3421004980883" />
+                    End="0,65.8070197267766" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="185.333333333334,42.6666666666667"
+          Id="Package\Create run record\Create inventory record"
+          TopLeft="370.958326543992,383.885972414046" />
+        <EdgeLayout
+          Id="Package\Create run record.PrecedenceConstraints[Constraint 5]"
+          TopLeft="463.624993210659,310.578952687269">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,73.3070197267766"
+              Start="0,0"
+              End="0,65.8070197267766">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,65.8070197267766" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="185.333333333334,42.6666666666667"
+          Id="Package\Create run record\Create inbound record"
+          TopLeft="370.958326543992,499.859658807489" />
+        <EdgeLayout
+          Id="Package\Create run record.PrecedenceConstraints[Constraint 6]"
+          TopLeft="463.624993210659,426.552639080712">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,73.3070197267767"
+              Start="0,0"
+              End="0,65.8070197267767">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,65.8070197267767" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="185.333333333334,42.6666666666667"
+          Id="Package\Create run record\ClearAll_DMTables"
+          TopLeft="370.958326543992,35.9649132337156" />
+        <EdgeLayout
+          Id="Package\Create run record.PrecedenceConstraints[Constraint]"
+          TopLeft="463.624993210659,78.6315799003823">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,73.3070197267766"
+              Start="0,0"
+              End="0,65.8070197267766">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,65.8070197267766" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -117,8 +281,8 @@
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="347.333333333334,225.333333333334"
-          Size="347.333333333334,268.666666666667"
+          PanelSize="656.666666666667,646.666666666667"
+          Size="656.666666666667,690"
           Id="Package\Create run record"
           TopLeft="84.9999987334013,144.368423770009" />
       </GraphLayout>
